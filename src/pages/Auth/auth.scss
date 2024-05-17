@@ -1,0 +1,18 @@
+.auth{
+    background-image: url("../../assets/images/bg/bg.jpg");
+    background-size: cover;
+
+    .card {
+        filter: drop-shadow(2px 2px 10px var(--drop-shadow));
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .auth {
+        background: none;
+
+        .card {
+            filter: none;
+        }
+    }
+}
