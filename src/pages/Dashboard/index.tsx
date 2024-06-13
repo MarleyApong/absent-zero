@@ -5,7 +5,7 @@ const Dashboard = () => {
 
     const Navigate = useNavigate()
     return (
-        <div className="h-screen flex justify-center items-center gap-2">
+        <div className="h-full flex justify-center items-center gap-2">
             <Button onClick={() => Navigate("/check-mypresence")}>Scan code QR</Button>
             <Button>My presence</Button>
         </div>

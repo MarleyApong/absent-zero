@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card'
-import { Input } from '../ui/input'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
-import { Button } from '../ui/button'
-import Logo from '../../assets/images/logo.png'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../ui/card'
+import { Input } from '../../ui/input'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form'
+import { Button } from '../../ui/button'
+import Logo from '../../../assets/images/logo.png'
 import { useNavigate } from 'react-router-dom'
 
 const LoginFormSchema = z.object({

@@ -1,4 +1,4 @@
-import LoginForm from "@/components/me/login-form"
+import LoginForm from "@/components/me/LoginForm"
 import './auth.scss'
 
 const Auth = () => {

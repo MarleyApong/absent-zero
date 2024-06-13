@@ -1,0 +1,22 @@
+.profile,
+.show-profile {
+    position: absolute;
+    width: auto;
+    max-width: 200px;
+    top: 4rem;
+    transform: translateX(150%);
+    transition: 1s;
+    z-index: 100;
+    background: none;
+
+    button {
+        padding: 3px;
+        border: 1px solid #dedede;
+        font-size: 12px;
+    }
+}
+
+.show-profile {
+    transform: translateX(0);
+    transition: 1s;
+}
