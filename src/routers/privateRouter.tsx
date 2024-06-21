@@ -1,30 +1,24 @@
-import { useState, useEffect } from 'react'
 import { Route, Routes } from "react-router-dom"
 import { CheckMyPresence, Dashboard, Layout } from '../pages'
-import Footer from "@/components/me/Footer"
 import Header from "@/components/me/Header"
-import { useDimensionHeader } from "@/hooks/useContext"
+import Historical from "@/pages/Historical"
+import TimeTable from "@/pages/TimeTable"
 
 const PrivateRouter = () => {
-  const { heightHeader } = useDimensionHeader()
-  const [contentHeight, setContentHeight] = useState(`calc(100vh - ${heightHeader}px)`)
-
-  useEffect(() => {
-    setContentHeight(`calc(100vh - ${heightHeader}px)`)
-  }, [heightHeader])
 
   return (
-    <div className="pages w-screen min-h-screen flex flex-col overflow-hidden">
+    <div className="flex min-h-screen w-full flex-col">
       <Header />
-      <div className={`content flex flex-col w-full overflow-hidden`} style={{ height: contentHeight }}>
+      <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Dashboard />} />
-            <Route path="check-mypresence" element={<CheckMyPresence />} />
+            <Route path="/check-mypresence" element={<CheckMyPresence />} />
+            <Route path="/historical" element={<Historical />} />
+            <Route path="/time-table" element={<TimeTable />} />
           </Route>
         </Routes>
-      </div>
-      <Footer />
+      </main >
     </div>
   )
 }
