@@ -11,6 +11,9 @@ import { toast } from "sonner"
 import Logo from '../../../assets/images/logo/logo-icon.png'
 import { AuthenticationService } from '@/services/authenticationSerrvice'
 import { sessionService } from '@/services/sessionService'
+import { encryptData } from '@/utils/utilsCrypto'
+import { userService } from '@/services/userSerrvice'
+import { Loader } from 'lucide-react'
 
 const LoginFormSchema = z.object({
     email: z.string().trim().min(1, 'Email is required.').email('Invalid email.'),
@@ -21,7 +24,7 @@ type LoginFormValues = z.infer<typeof LoginFormSchema>
 
 const LoginForm = () => {
     const navigate = useNavigate()
-    const [wait, setWait] = useState<boolean>(true)
+    const [wait, setWait] = useState<boolean>(false)
 
     const form = useForm<LoginFormValues>({
         resolver: zodResolver(LoginFormSchema),
@@ -33,31 +36,27 @@ const LoginForm = () => {
     })
 
     const handleSubmitLoginForm = async (values: LoginFormValues) => {
-        console.log("sign in with values: ", values)
         if (values.email === "" || values.password === "") {
             toast("Fill in all fields.")
         } else {
-            setWait(false)
+            setWait(true)
             try {
-                const res = await AuthenticationService.login(values.email, values.password)
-                console.log(res);
+                let res = await AuthenticationService.login(values.email, values.password)
+                // const token = encryptData(res.data.access_token)
+                const token = res.data.access_token
                 
-                // const token = res.data.token
-                // const idUser = res.data.user.id
-                // const role = res.data.user.Role.id
-                // const env = res.data.user.Env.id
-                // const idStatus = res.data.user.Status.id
-                // setWait(true)
-                // if (res.data.user.Status.name !== 'actif') {
-                //     toast.error("Accès non authorisé !")
-                // } else {
-                //     sessionService.saveToken(token, idUser, role, env, idStatus)
-                //     navigate("/dashboard")
-                // }
-            } catch (err) {
-                setWait(true)
+                sessionService.saveToken(token)
+                if (token) {
+                    let res = await userService.getCurrentUser()                    
+                    sessionService.saveUser(encryptData(res.data))
+                }
+                setWait(false)
+                navigate("/")
+            } catch (err: any) {
+                setWait(false)
                 console.log(err);
-                
+                toast.error(err.response.data.message)
+
                 // if (err.response) {
                 //     if (err.response.data.name === 'UserAutNotFound') {
                 //         toast.error("Email ou mot de passe incorrect !")
@@ -115,7 +114,7 @@ const LoginForm = () => {
                         />
                     </CardContent>
                     <CardFooter className='flex justify-center'>
-                        <Button className='w-full' type="submit">Login</Button>
+                        <Button className='w-full' type="submit" disabled={wait}>Login {wait && <Loader />}</Button>
                     </CardFooter>
                 </Card>
             </form>

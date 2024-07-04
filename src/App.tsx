@@ -1,5 +1,5 @@
 import { Route, Routes, Navigate } from 'react-router-dom'
-import AuthGuard from './utils/authGuardUtil'
+import AuthGuardUtil from './utils/authGuardUtil'
 import PrivateRouter from './routers/privateRouter'
 import AuthRouter from './routers/authRouter'
 import './App.scss'
@@ -9,9 +9,9 @@ const App = () => {
     <Routes>
       <Route path="/auth/*" element={<AuthRouter />} />
       <Route path="/*" element={
-        <AuthGuard>
+        <AuthGuardUtil>
           <PrivateRouter />
-        </AuthGuard>
+        </AuthGuardUtil>
       }
       />
       <Route

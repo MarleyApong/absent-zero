@@ -1,0 +1,86 @@
+<div className="flex">
+    <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
+        <CardHeader className="flex flex-row items-center">
+            <div className="grid gap-2">
+                <CardTitle>Time table</CardTitle>
+                <CardDescription>
+                    {/* Recent the last five check. */}
+                </CardDescription>
+            </div>
+            <Button asChild size="sm" className="ml-auto gap-1">
+                <NavLink to="/time-table">
+                    View All
+                    <ArrowUpRight className="h-4 w-4" />
+                </NavLink>
+            </Button>
+        </CardHeader>
+        <CardContent>
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead className="text-left">Date</TableHead>
+                        <TableHead className="text-center">Monday</TableHead>
+                        <TableHead className="text-center">Tuesday</TableHead>
+                        <TableHead className="text-center">Wednesday</TableHead>
+                        <TableHead className="text-center">Thursday</TableHead>
+                        <TableHead className="text-center">Friday</TableHead>
+                        <TableHead className="text-right">Saturday</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    <TableRow>
+                        <TableCell className="text-left">2023-06-23</TableCell>
+                        <TableCell className="text-center">08:20</TableCell>
+                        <TableCell className="text-center">08:20</TableCell>
+                        <TableCell className="text-center">08:20</TableCell>
+                        <TableCell className="text-center">08:20</TableCell>
+                        <TableCell className="text-center">08:20</TableCell>
+                        <TableCell className="text-right">08:20</TableCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
+        </CardContent>
+    </Card>
+    <Card className="xl:col-span-1" x-chunk="dashboard-01-chunk-3">
+        <CardHeader className="flex flex-row items-center">
+            <div className="grid gap-2">
+                <CardTitle>Time table</CardTitle>
+                <CardDescription>
+                    {/* Recent the last five check. */}
+                </CardDescription>
+            </div>
+            <Button asChild size="sm" className="ml-auto gap-1">
+                <NavLink to="/time-table">
+                    View All
+                    <ArrowUpRight className="h-4 w-4" />
+                </NavLink>
+            </Button>
+        </CardHeader>
+        <CardContent>
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead className="text-left">Date</TableHead>
+                        <TableHead className="text-center">Monday</TableHead>
+                        <TableHead className="text-center">Tuesday</TableHead>
+                        <TableHead className="text-center">Wednesday</TableHead>
+                        <TableHead className="text-center">Thursday</TableHead>
+                        <TableHead className="text-center">Friday</TableHead>
+                        <TableHead className="text-right">Saturday</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    <TableRow>
+                        <TableCell className="text-left">2023-06-23</TableCell>
+                        <TableCell className="text-center">08:20</TableCell>
+                        <TableCell className="text-center">08:20</TableCell>
+                        <TableCell className="text-center">08:20</TableCell>
+                        <TableCell className="text-center">08:20</TableCell>
+                        <TableCell className="text-center">08:20</TableCell>
+                        <TableCell className="text-right">08:20</TableCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
+        </CardContent>
+    </Card>
+</div>

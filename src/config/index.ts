@@ -4,7 +4,7 @@ interface Config {
 }
 
 let config: Config
-const ENV: string = 'dev'
+const ENV: string = 'prod'
 
 if (ENV === 'dev') {
    config = {
@@ -13,7 +13,7 @@ if (ENV === 'dev') {
    }
 } else {
    config = {
-      serverUrl: "",
+      serverUrl: "https://absent-api.gastrolink-resto.com/api/v1",
       frontUrl: "",
    }
 }

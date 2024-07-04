@@ -1,4 +1,6 @@
-import jwt from 'jwt-simple'
+// import { decryptData } from "@/utils/utilsCrypto"
+import { jwtDecode } from "jwt-decode"
+import { NavigateFunction } from "react-router-dom"
 
 interface TokenValidity {
     isValid: boolean
@@ -10,9 +12,15 @@ interface JwtPayload {
     [key: string]: any
 }
 
+interface LoginStatus {
+    isValid: boolean
+    errorCode?: string
+}
+
+
 const decodeJwt = (token: string): JwtPayload | null => {
     try {
-        const decoded: JwtPayload = jwt.decode(token, '', true) // Pass an empty secret for decoding without verification
+        const decoded: JwtPayload = jwtDecode<JwtPayload>(token)
         return decoded
     } catch (err) {
         return null
@@ -21,6 +29,7 @@ const decodeJwt = (token: string): JwtPayload | null => {
 
 const isValidToken = (token: string): TokenValidity => {
     const decoded = decodeJwt(token)
+
     if (!decoded) {
         return { isValid: false, errorCode: "INVALID_TOKEN_FORMAT" }
     }
@@ -31,29 +40,24 @@ const isValidToken = (token: string): TokenValidity => {
     return { isValid: true }
 }
 
-const saveToken = (token: string, id: string, role: string, env: string, status: string): void => {
-    sessionStorage.setItem('lkiy-', token)
-    sessionStorage.setItem('id', id)
-    sessionStorage.setItem('lero', role)
-    sessionStorage.setItem('env', env)
-    sessionStorage.setItem('status', status)
+const saveToken = (token: string): void => {
+    sessionStorage.setItem('m-', token)
 }
 
-const logout = (): void => {
-    sessionStorage.removeItem('lkiy-')
-    sessionStorage.removeItem('id')
-    sessionStorage.removeItem('status')
-    sessionStorage.removeItem('env')
-    sessionStorage.removeItem('lero')
+const saveUser = (user: string): void => {
+    sessionStorage.setItem('focus', user)
 }
 
-interface LoginStatus {
-    isValid: boolean
-    errorCode?: string
+const logout = (navigate: NavigateFunction): void => {
+    navigate('/auth/login')
+    sessionStorage.removeItem('m-')
+    sessionStorage.removeItem('focus')
 }
 
 const isLogged = (): LoginStatus => {
-    const token = sessionStorage.getItem('lkiy-')
+    // const token = decryptData(sessionStorage.getItem('m-'))
+    const token = sessionStorage.getItem('m-')
+
     if (token) {
         const tokenValidity = isValidToken(token)
         if (tokenValidity.isValid) {
@@ -66,11 +70,13 @@ const isLogged = (): LoginStatus => {
 }
 
 const getToken = (): string | null => {
-    return sessionStorage.getItem('lkiy-')
+    // return decryptData(sessionStorage.getItem('m-'))
+    return sessionStorage.getItem('m-')
 }
 
 export const sessionService = {
     saveToken,
+    saveUser,
     logout,
     isLogged,
     getToken
